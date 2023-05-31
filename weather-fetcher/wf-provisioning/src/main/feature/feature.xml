@@ -19,6 +19,7 @@
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${fasterxml-jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/${fasterxml-jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/${fasterxml-jackson.version}</bundle>
+        <bundle dependency="true">mvn:org.mapstruct/mapstruct/${org.mapstruct.version}</bundle>
 
         <feature dependency="true">http</feature>
         <feature version="${project.version}">api</feature>

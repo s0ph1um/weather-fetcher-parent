@@ -18,13 +18,18 @@
     </jaxrs:server>
 
     <bean id="weatherBean" class="com.wfproject.rest.impl.WeatherServiceImpl">
-        <argument ref="weatherApi"/>
+<!--        <argument ref="weatherApi"/>-->
+<!--        <argument ref="weatherMapper"/>-->
     </bean>
 
-    <bean id="weatherApi" class="com.wfproject.rest.impl.WeatherApiProxy"
-          factory-method="create">
-        <argument value="http://api.openweathermap.org"/>
-    </bean>
+<!--    <bean id="weatherApi" class="com.wfproject.rest.impl.WeatherApiProxy"-->
+<!--          factory-method="create">-->
+<!--        <argument value="http://api.openweathermap.org"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="weatherMapper" class="com.wfproject.rest.impl.mapper.WeatherMapper"-->
+<!--          factory-method="create">-->
+<!--    </bean>-->
 
     <cxf:bus>
         <cxf:features>
