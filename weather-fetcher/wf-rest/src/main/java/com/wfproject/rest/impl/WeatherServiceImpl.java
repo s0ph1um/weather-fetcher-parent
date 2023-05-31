@@ -1,8 +1,9 @@
 package com.wfproject.rest.impl;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import com.wfproject.api.WeatherResponse;
+import com.wfproject.api.WeatherResponseDto;
 import com.wfproject.api.WeatherService;
+import com.wfproject.rest.impl.mapper.WeatherMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 
@@ -12,11 +13,10 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class WeatherServiceImpl implements WeatherService {
 
-//    private final WeatherApi weatherApi;
-//    private final WeatherMapper weatherMapper;
+    private final WeatherMapper weatherMapper;
 
     @Override
-    public WeatherResponse getCurrentWeather(String countryCode, String city, String units) throws IOException {
+    public WeatherResponseDto getCurrentWeather(String countryCode, String city, String units) throws IOException {
         if (units == null) {
             units = "metric";
         }
@@ -27,14 +27,14 @@ public class WeatherServiceImpl implements WeatherService {
                 Collections.singletonList(new JacksonJsonProvider()));
 
 
-        return
-//        String response =
+
+        ApiResponse response =
                 weatherApi.getCurrentWeather(
                 locationQuery,
                 units,
                 "dbb3fe174b786223a4226efa0713e335");
 
-//        return weatherMapper.deserialize(response);
+        return weatherMapper.openWeatherModelToWeatherModel(response);
 
     }
 

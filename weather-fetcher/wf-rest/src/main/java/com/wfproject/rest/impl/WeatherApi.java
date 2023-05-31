@@ -1,7 +1,5 @@
 package com.wfproject.rest.impl;
 
-import com.wfproject.api.WeatherResponse;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -14,8 +12,8 @@ public interface WeatherApi {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     @Path("/weather")
-    WeatherResponse getCurrentWeather(@QueryParam("q") String locationQuery,
-                                      @QueryParam("units") String units,
-                                      @QueryParam("appid") String appId);
+    ApiResponse getCurrentWeather(@QueryParam("q") String locationQuery,
+                                  @QueryParam("units") String units,
+                                  @QueryParam("appid") String appId);
 
 }
