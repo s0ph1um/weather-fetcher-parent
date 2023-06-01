@@ -3,26 +3,36 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
            xmlns:cxf="http://cxf.apache.org/blueprint/core"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
            xsi:schemaLocation="
              http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
              http://cxf.apache.org/blueprint/jaxrs http://cxf.apache.org/schemas/blueprint/jaxrs.xsd
-             http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd">
+             http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
+             http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd
+             ">
 
     <jaxrs:server id="weatherRest" address="/weather">
         <jaxrs:serviceBeans>
-            <ref component-id="weatherBean"/>
+            <ref component-id="weatherServiceBean"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
         </jaxrs:providers>
     </jaxrs:server>
 
-    <bean id="weatherBean" class="com.wfproject.rest.impl.WeatherServiceImpl">
-        <argument ref="weatherMapper"/>
+    <bean id="weatherApi" class="com.wfproject.rest.impl.WeatherApiProxy"
+          factory-method="init">
+        <argument value="${domainAddress}"/>
     </bean>
 
     <bean id="weatherMapper" class="com.wfproject.rest.impl.mapper.WeatherMapper"
-          factory-method="create">
+          factory-method="init">
+    </bean>
+
+    <bean id="weatherServiceBean" class="com.wfproject.rest.impl.WeatherServiceImpl">
+        <argument value="${apiKey}" index="0"/>
+        <argument ref="weatherMapper" index="1"/>
+        <argument ref="weatherApi" index="2"/>
     </bean>
 
     <cxf:bus>
@@ -30,5 +40,12 @@
             <cxf:logging/>
         </cxf:features>
     </cxf:bus>
-    
+
+    <cm:property-placeholder persistent-id="props" update-strategy="reload">
+        <cm:default-properties>
+            <cm:property name="apiKey" value="dbb3fe174b786223a4226efa0713e335"/>
+            <cm:property name="domainAddress" value="http://api.openweathermap.org"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
+
 </blueprint>

@@ -1,16 +1,19 @@
 package com.wfproject.rest.impl.mapper;
 
-import com.wfproject.api.WeatherResponseDto;
-import com.wfproject.rest.impl.ApiResponse;
+import com.wfproject.api.WeatherResponse;
+import com.wfproject.rest.impl.model.WeatherApiResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 
 @Mapper
 public interface WeatherMapper {
 
-    public static WeatherMapper create() {
+    static WeatherMapper init() {
         return Mappers.getMapper(WeatherMapper.class);
     }
 
@@ -29,19 +32,35 @@ public interface WeatherMapper {
 //        return response;
 //    }
 
-    //    @Mapping(target = "{}", source = "main")
-    @Mapping(source = "main.temp", target = "temp")
-    @Mapping(source = "main.feelsLike", target = "feelsLike")
-    @Mapping(source = "main.tempMin", target = "tempMin")
-    @Mapping(source = "main.tempMax", target = "tempMax")
-    @Mapping(source = "main.pressure", target = "pressure")
-    @Mapping(source = "main.humidity", target = "humidity")
+    @Mappings({
+            @Mapping(source = "main.temp", target = "temp"),
+            @Mapping(source = "main.feelsLike", target = "feelsLike"),
+            @Mapping(source = "main.tempMin", target = "tempMin"),
+            @Mapping(source = "main.tempMax", target = "tempMax"),
+            @Mapping(source = "main.pressure", target = "pressure"),
+            @Mapping(source = "main.humidity", target = "humidity"),
+//            @Mapping(source = "sys.sunrise", target = "sunrise"),
+//            @Mapping(source = "sys.sunset", target = "sunset"),
+//            @Mapping(target = "icon", expression = "java(weather.get(0).getIcon())")
+//            @Mapping(target = "icon", expression = "java(weather.get(0).getIcon())")
+//            @Mapping(expression = "java(Arrays.asList(SubMapper.INSTANCE.dataToTransaction(weather)))", target = "icon")
+//            @Mapping(expression = "java(weather.get(0))", target = "icon")
+
+    })
 //    @Mapping(target = "main.temp")
-//    @Mapping(target = "main.feels_like")
-//    @Mapping(target = "main.temp_min")
-//    @Mapping(target = "main.temp_max")
+//    @Mapping(target = "main.feelsLike")
+//    @Mapping(target = "main.tempMin")
+//    @Mapping(target = "main.tempMax")
 //    @Mapping(target = "main.pressure")
-//    @Mapping(target = "main.humidity")
-    WeatherResponseDto openWeatherModelToWeatherModel(ApiResponse openWeatherModel);
+//    @Mapping(target = "main.humidity")})
+    WeatherResponse apiResponseToWeatherResponse(WeatherApiResponse weatherApiResponse);
+
+    default WeatherApiResponse.Weather map(List<WeatherApiResponse.Weather> weather) {
+        return weather.get(0);
+    }
+
+//    default WeatherApiResponse.Weather mapTransactionToList(List<WeatherApiResponse.Weather> source) {
+//        return source;
+//    }
 
 }

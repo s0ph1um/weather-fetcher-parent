@@ -8,20 +8,20 @@ import lombok.*;
 @Getter
 @Setter
 @ToString // todo remove
-@Data
+//@Data
 //@JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherResponseDto {
+public class WeatherResponse {
 
     //    private WeatherDetail main;
     private double temp;
-    @JsonProperty("feels_like")
     private double feelsLike;
-
-    @JsonProperty("temp_min")
     private double tempMin;
-
-    @JsonProperty("temp_max")
     private double tempMax;
     private double pressure;
     private double humidity;
+    private double sunrise;
+    private double sunset;
+    private String icon;
+
+
 }

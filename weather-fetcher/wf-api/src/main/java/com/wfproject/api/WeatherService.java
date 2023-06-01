@@ -10,8 +10,8 @@ public interface WeatherService {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     @Path("/currentWeather")
-    WeatherResponseDto getCurrentWeather(@QueryParam("country") String countryCode,
-                                         @QueryParam("city") String city,
-                                         @QueryParam("units") String units) throws IOException;
+    WeatherResponse getCurrentWeather(@QueryParam("country") String countryCode,
+                                      @QueryParam("city") String city,
+                                      @QueryParam("units") String units) throws IOException;
 
 }

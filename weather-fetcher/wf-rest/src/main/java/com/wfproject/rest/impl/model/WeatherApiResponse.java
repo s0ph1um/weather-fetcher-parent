@@ -1,8 +1,10 @@
-package com.wfproject.rest.impl;
+package com.wfproject.rest.impl.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,14 +13,40 @@ import lombok.*;
 @ToString // todo remove
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApiResponse {
+public class WeatherApiResponse {
 
     @JsonProperty("main")
     private WeatherDetail main;
 
-    @Getter
-    @Setter
-    @ToString
+    @JsonProperty("sys")
+    private Sys sys;
+
+    @JsonProperty("weather")
+    private List<Weather> weather;
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Weather {
+        private String icon;
+
+    }
+
+
+//    @Getter
+//    @Setter
+//    @ToString
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Sys {
+        private long sunrise;
+        private long sunset;
+
+    }
+
+//    @Getter
+//    @Setter
+//    @ToString
+    @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class WeatherDetail {
         private double temp;

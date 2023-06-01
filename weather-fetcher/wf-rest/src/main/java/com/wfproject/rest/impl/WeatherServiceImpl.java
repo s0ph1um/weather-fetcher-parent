@@ -1,40 +1,39 @@
 package com.wfproject.rest.impl;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import com.wfproject.api.WeatherResponseDto;
+import com.wfproject.api.WeatherResponse;
 import com.wfproject.api.WeatherService;
 import com.wfproject.rest.impl.mapper.WeatherMapper;
+import com.wfproject.rest.impl.model.WeatherApiResponse;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Dictionary;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
+@AllArgsConstructor
 public class WeatherServiceImpl implements WeatherService {
 
+    private final String API_KEY;
     private final WeatherMapper weatherMapper;
+    private final OpenWeatherApi weatherApi;
+
 
     @Override
-    public WeatherResponseDto getCurrentWeather(String countryCode, String city, String units) throws IOException {
-        if (units == null) {
-            units = "metric";
-        }
+    public WeatherResponse getCurrentWeather(String countryCode, String city, String units) throws IOException {
+        System.out.println("UNITS: " + units);
         String locationQuery = city.concat(",").concat(countryCode);
-
-        WeatherApi weatherApi = JAXRSClientFactory.create("http://api.openweathermap.org",
-                WeatherApi.class,
-                Collections.singletonList(new JacksonJsonProvider()));
-
-
-
-        ApiResponse response =
+        WeatherApiResponse response =
                 weatherApi.getCurrentWeather(
                 locationQuery,
                 units,
-                "dbb3fe174b786223a4226efa0713e335");
+                API_KEY);
 
-        return weatherMapper.openWeatherModelToWeatherModel(response);
+        return weatherMapper.apiResponseToWeatherResponse(response);
 
     }
 

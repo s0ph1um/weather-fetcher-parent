@@ -45,6 +45,23 @@
             <artifactId>jackson-core</artifactId>
             <version>${fasterxml-jackson.version}</version>
         </dependency>
+
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.osgi/org.osgi.service.cm &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.osgi</groupId>-->
+<!--            <artifactId>org.osgi.service.cm</artifactId>-->
+<!--            <version>1.6.1</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.osgi/org.osgi.service.component.annotations &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.osgi</groupId>-->
+<!--            <artifactId>org.osgi.service.component.annotations</artifactId>-->
+<!--            <version>1.5.0</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+
+
     </dependencies>
 
     <build>

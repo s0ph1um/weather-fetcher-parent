@@ -34,4 +34,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-etc/api.properties.cfg
+etc/props.cfg
