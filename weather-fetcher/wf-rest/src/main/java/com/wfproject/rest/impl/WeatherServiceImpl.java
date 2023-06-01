@@ -18,19 +18,22 @@ import java.util.Dictionary;
 @AllArgsConstructor
 public class WeatherServiceImpl implements WeatherService {
 
-    private final String API_KEY;
     private final WeatherMapper weatherMapper;
     private final OpenWeatherApi weatherApi;
+    private final String API_KEY;
+    private final String UNITS;
 
 
     @Override
     public WeatherResponse getCurrentWeather(String countryCode, String city, String units) throws IOException {
+        System.out.println("API_KEY: " + API_KEY);
+        System.out.println("UNITS: " + UNITS);
         String locationQuery = city.concat(",").concat(countryCode);
         WeatherApiResponse response =
                 weatherApi.getCurrentWeather(
-                locationQuery,
-                units,
-                API_KEY);
+                        locationQuery,
+                        UNITS,
+                        API_KEY);
 
         return weatherMapper.apiResponseToWeatherResponse(response);
 

@@ -12,7 +12,7 @@ public interface OpenWeatherApi {
     @GET
     @Path("/weather")
     WeatherApiResponse getCurrentWeather(@QueryParam("q") String locationQuery,
-                                         @DefaultValue("metric") @QueryParam("units") String units, // metric, standard, imperial
+                                         @QueryParam("units") String units, // metric, standard, imperial
                                          @QueryParam("appid") String appId);
 
 }

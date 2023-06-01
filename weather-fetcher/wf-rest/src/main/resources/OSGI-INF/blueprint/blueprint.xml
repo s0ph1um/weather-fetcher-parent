@@ -29,10 +29,13 @@
     </bean>
 
     <bean id="weatherServiceBean" class="com.wfproject.rest.impl.WeatherServiceImpl">
-        <argument value="${apiKey}" index="0"/>
-        <argument ref="weatherMapper" index="1"/>
-        <argument ref="weatherApi" index="2"/>
+        <argument ref="weatherMapper"/>
+        <argument ref="weatherApi"/>
+        <argument value="${apiKey}"/>
+        <argument value="${units}"/>
     </bean>
+
+
 
     <cxf:bus>
         <cxf:features>
@@ -42,6 +45,7 @@
 
     <cm:property-placeholder persistent-id="api.properties" update-strategy="reload">
         <cm:default-properties>
+            <cm:property name="units" value="units"/>
             <cm:property name="apiKey" value="apiKey"/>
             <cm:property name="domainAddress" value="domainAddress"/>
         </cm:default-properties>
