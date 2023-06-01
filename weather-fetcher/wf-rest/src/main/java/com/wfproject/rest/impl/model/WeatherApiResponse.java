@@ -14,12 +14,12 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherApiResponse {
+    @JsonProperty("sys")
+    private Sys sys;
 
     @JsonProperty("main")
     private WeatherDetail main;
 
-    @JsonProperty("sys")
-    private Sys sys;
 
     @JsonProperty("weather")
     private List<Weather> weather;

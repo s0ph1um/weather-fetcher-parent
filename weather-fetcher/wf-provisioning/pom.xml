@@ -48,6 +48,11 @@
                                     <file>target/feature/feature.xml</file>
                                     <type>xml</type>
                                 </artifact>
+                                <artifact>
+                                    <file>etc/api.properties.cfg</file>
+                                    <type>cfg</type>
+                                    <classifier>configuration</classifier>
+                                </artifact>
                             </artifacts>
                         </configuration>
                     </execution>

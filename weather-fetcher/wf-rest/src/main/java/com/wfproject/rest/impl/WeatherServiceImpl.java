@@ -25,7 +25,6 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Override
     public WeatherResponse getCurrentWeather(String countryCode, String city, String units) throws IOException {
-        System.out.println("UNITS: " + units);
         String locationQuery = city.concat(",").concat(countryCode);
         WeatherApiResponse response =
                 weatherApi.getCurrentWeather(

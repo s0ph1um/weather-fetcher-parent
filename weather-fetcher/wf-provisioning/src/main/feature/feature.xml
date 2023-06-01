@@ -24,6 +24,6 @@
         <feature dependency="true">http</feature>
         <feature version="${project.version}">api</feature>
 
-        <configfile finalname="/etc/props.cfg">mvn:com.wfproject/wf-provisioning/${project.version}/cfg</configfile>
+        <configfile finalname="/etc/api.properties.cfg">mvn:com.wfproject/wf-provisioning/${project.version}/cfg/configuration</configfile>
     </feature>
 </features>

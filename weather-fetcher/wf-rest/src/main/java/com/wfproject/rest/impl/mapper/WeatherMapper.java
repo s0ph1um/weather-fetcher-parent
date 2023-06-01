@@ -17,21 +17,6 @@ public interface WeatherMapper {
         return Mappers.getMapper(WeatherMapper.class);
     }
 
-//    @Override
-//    public WeatherResponse deserialize(String content) throws IOException {
-//        WeatherResponse response = new WeatherResponse();
-//
-//        JsonNode rootNode = new ObjectMapper().readTree(content);
-//        response.setTemp(Double.parseDouble(rootNode.path("main").path("temp").asText()));
-//        response.setFeelsLike(Double.parseDouble(rootNode.path("main").path("feelsLike").asText()));
-//        response.setTempMin(Double.parseDouble(rootNode.path("main").path("tempMin").asText()));
-//        response.setTempMax(Double.parseDouble(rootNode.path("main").path("tempMax").asText()));
-//        response.setPressure(Double.parseDouble(rootNode.path("main").path("pressure").asText()));
-//        response.setHumidity(Double.parseDouble(rootNode.path("main").path("humidity").asText()));
-//
-//        return response;
-//    }
-
     @Mappings({
             @Mapping(source = "main.temp", target = "temp"),
             @Mapping(source = "main.feelsLike", target = "feelsLike"),
@@ -41,7 +26,7 @@ public interface WeatherMapper {
             @Mapping(source = "main.humidity", target = "humidity"),
 //            @Mapping(source = "sys.sunrise", target = "sunrise"),
 //            @Mapping(source = "sys.sunset", target = "sunset"),
-//            @Mapping(target = "icon", expression = "java(weather.get(0).getIcon())")
+//            @Mapping(target = "icon", expression = "java(weatherApiResponse.getWeather().get(0).getIcon())")
 //            @Mapping(target = "icon", expression = "java(weather.get(0).getIcon())")
 //            @Mapping(expression = "java(Arrays.asList(SubMapper.INSTANCE.dataToTransaction(weather)))", target = "icon")
 //            @Mapping(expression = "java(weather.get(0))", target = "icon")
@@ -55,9 +40,6 @@ public interface WeatherMapper {
 //    @Mapping(target = "main.humidity")})
     WeatherResponse apiResponseToWeatherResponse(WeatherApiResponse weatherApiResponse);
 
-    default WeatherApiResponse.Weather map(List<WeatherApiResponse.Weather> weather) {
-        return weather.get(0);
-    }
 
 //    default WeatherApiResponse.Weather mapTransactionToList(List<WeatherApiResponse.Weather> source) {
 //        return source;

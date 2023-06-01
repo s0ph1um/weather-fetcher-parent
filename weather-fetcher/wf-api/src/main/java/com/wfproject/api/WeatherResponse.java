@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @ToString // todo remove
@@ -19,8 +19,8 @@ public class WeatherResponse {
     private double tempMax;
     private double pressure;
     private double humidity;
-    private double sunrise;
-    private double sunset;
+    private long sunrise;
+    private long sunset;
     private String icon;
 
 
