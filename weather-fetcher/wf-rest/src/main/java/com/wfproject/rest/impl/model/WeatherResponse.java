@@ -13,10 +13,10 @@ import java.util.List;
 @ToString // todo remove
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherApiResponse {
+public class WeatherResponse {
 
-//    @JsonProperty("dt")
-//    private long dt;
+    @JsonProperty("dt")
+    private long datetime;
 
     @JsonProperty("sys")
     private Sys sys;

@@ -1,6 +1,5 @@
 package com.wfproject.api;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @AllArgsConstructor
@@ -10,7 +9,7 @@ import lombok.*;
 @ToString // todo remove
 @Data
 //@JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherResponse {
+public class WeatherResponseDto {
 
     private double temp;
     private double feelsLike;
@@ -21,6 +20,6 @@ public class WeatherResponse {
     private long sunrise;
     private long sunset;
     private String icon;
-    private long dt;
+    private long datetime;
 
 }
