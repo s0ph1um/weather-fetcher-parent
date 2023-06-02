@@ -8,12 +8,16 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+//@Getter
+//@Setter
 @ToString // todo remove
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherApiResponse {
+
+//    @JsonProperty("dt")
+//    private long dt;
+
     @JsonProperty("sys")
     private Sys sys;
 

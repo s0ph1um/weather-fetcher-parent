@@ -10,6 +10,14 @@
              http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
              http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
 
+    <cm:property-placeholder persistent-id="api.properties" update-strategy="reload">
+        <cm:default-properties>
+            <cm:property name="measureUnits" value="measureUnits"/>
+            <cm:property name="apiKey" value="apiKey"/>
+            <cm:property name="domainAddress" value="domainAddress"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
+
     <jaxrs:server id="weatherRest" address="/weather">
         <jaxrs:serviceBeans>
             <ref component-id="weatherServiceBean"/>
@@ -37,8 +45,6 @@
         <argument ref="weatherMapper"/>
         <argument ref="weatherApi"/>
         <argument ref="queryParams"/>
-<!--        <argument value="${apiKey}"/>-->
-<!--        <argument value="${measureUnits}"/>-->
     </bean>
 
     <cxf:bus>
@@ -47,11 +53,4 @@
         </cxf:features>
     </cxf:bus>
 
-    <cm:property-placeholder persistent-id="api.properties" update-strategy="reload">
-        <cm:default-properties>
-            <cm:property name="measureUnits" value="measureUnits"/>
-            <cm:property name="apiKey" value="apiKey"/>
-            <cm:property name="domainAddress" value="domainAddress"/>
-        </cm:default-properties>
-    </cm:property-placeholder>
 </blueprint>

@@ -5,14 +5,13 @@ import lombok.*;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Getter
-@Setter
+//@Getter
+//@Setter
 @ToString // todo remove
-//@Data
+@Data
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherResponse {
 
-    //    private WeatherDetail main;
     private double temp;
     private double feelsLike;
     private double tempMin;
@@ -22,6 +21,6 @@ public class WeatherResponse {
     private long sunrise;
     private long sunset;
     private String icon;
-
+    private long dt;
 
 }

@@ -24,6 +24,7 @@ public interface WeatherMapper {
             @Mapping(source = "main.tempMax", target = "tempMax"),
             @Mapping(source = "main.pressure", target = "pressure"),
             @Mapping(source = "main.humidity", target = "humidity"),
+//            @Mapping(source = "dt", target = "dt")
 //            @Mapping(source = "sys.sunrise", target = "sunrise"),
 //            @Mapping(source = "sys.sunset", target = "sunset"),
 //            @Mapping(target = "icon", expression = "java(weatherApiResponse.getWeather().get(0).getIcon())")
@@ -32,17 +33,6 @@ public interface WeatherMapper {
 //            @Mapping(expression = "java(weather.get(0))", target = "icon")
 
     })
-//    @Mapping(target = "main.temp")
-//    @Mapping(target = "main.feelsLike")
-//    @Mapping(target = "main.tempMin")
-//    @Mapping(target = "main.tempMax")
-//    @Mapping(target = "main.pressure")
-//    @Mapping(target = "main.humidity")})
     WeatherResponse apiResponseToWeatherResponse(WeatherApiResponse weatherApiResponse);
-
-
-//    default WeatherApiResponse.Weather mapTransactionToList(List<WeatherApiResponse.Weather> source) {
-//        return source;
-//    }
 
 }
