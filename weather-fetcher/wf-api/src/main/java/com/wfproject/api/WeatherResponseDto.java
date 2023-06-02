@@ -20,6 +20,8 @@ public class WeatherResponseDto {
     private long sunrise;
     private long sunset;
     private String icon;
-    private long datetime;
+    private String weatherDescription;
+    private long measurementTimestamp;
+    private long utcOffsetSeconds;
 
 }

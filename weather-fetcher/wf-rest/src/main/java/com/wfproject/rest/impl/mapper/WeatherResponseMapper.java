@@ -4,7 +4,6 @@ import com.wfproject.api.WeatherResponseDto;
 import com.wfproject.rest.impl.model.WeatherResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 
@@ -15,20 +14,23 @@ public interface WeatherResponseMapper {
         return Mappers.getMapper(WeatherResponseMapper.class);
     }
 
-//    @Mappings({
-            @Mapping(source = "main.temp", target = "temp")
-            @Mapping(source = "main.feelsLike", target = "feelsLike")
-            @Mapping(source = "main.tempMin", target = "tempMin")
-            @Mapping(source = "main.tempMax", target = "tempMax")
-            @Mapping(source = "main.pressure", target = "pressure")
-            @Mapping(source = "main.humidity", target = "humidity")
-            @Mapping(source = "datetime", target = "datetime")
-            @Mapping(source = "sys.sunrise", target = "sunrise")
-            @Mapping(source = "sys.sunset", target = "sunset")
-            @Mapping(target = "icon", expression = "java(weatherResponse.getWeather().get(0).getIcon())")
-//            @Mapping(expression = "java(Arrays.asList(SubMapper.INSTANCE.dataToTransaction(weather)))", target = "icon")
+    //    @Mappings({
+    @Mapping(source = "measurementTimestamp", target = "measurementTimestamp")
+    @Mapping(source = "utcOffsetSeconds", target = "utcOffsetSeconds")
+    @Mapping(source = "daytimeInfo.sunrise", target = "sunrise")
+    @Mapping(source = "daytimeInfo.sunset", target = "sunset")
+    @Mapping(source = "weatherMetrics.temp", target = "temp")
+    @Mapping(source = "weatherMetrics.feelsLike", target = "feelsLike")
+    @Mapping(source = "weatherMetrics.tempMin", target = "tempMin")
+    @Mapping(source = "weatherMetrics.tempMax", target = "tempMax")
+    @Mapping(source = "weatherMetrics.pressure", target = "pressure")
+    @Mapping(source = "weatherMetrics.humidity", target = "humidity")
+    @Mapping(source = "weatherCondition.icon", target = "icon")
+    @Mapping(source = "weatherCondition.description", target = "weatherDescription")
+
+//            @Mapping(target = "icon", expression = "java(weatherResponse.getWeather().get(0).getIcon())")
 
 //    })
-    WeatherResponseDto apiResponseToWeatherResponse(WeatherResponse weatherResponse);
+    WeatherResponseDto weatherResponseToWeatherResponseDto(WeatherResponse weatherResponse);
 
 }

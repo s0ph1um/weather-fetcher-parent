@@ -16,8 +16,7 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Override
     public WeatherResponseDto getCurrentWeather(String countryCode, String city, String units) {
-//        System.out.println("API_KEY: " + queryParams.getApiKey());
-        System.out.println("UNITS: " + queryParams.getMeasureUnits());
+
         String locationQuery = city.concat(",").concat(countryCode);
         WeatherResponse response =
                 weatherApi.getCurrentWeather(
@@ -25,9 +24,12 @@ public class WeatherServiceImpl implements WeatherService {
                         queryParams.getMeasureUnits(),
                         queryParams.getApiKey());
 
+
+        response.setWeatherCondition(response.getWeatherConditions().get(0));
+
         System.out.println(response);
 
-        return weatherResponseMapper.apiResponseToWeatherResponse(response);
+        return weatherResponseMapper.weatherResponseToWeatherResponseDto(response);
     }
 
 }

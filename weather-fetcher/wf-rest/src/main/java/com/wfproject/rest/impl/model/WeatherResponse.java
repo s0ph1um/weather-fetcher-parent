@@ -16,22 +16,29 @@ import java.util.List;
 public class WeatherResponse {
 
     @JsonProperty("dt")
-    private long datetime;
+    private long measurementTimestamp;
+
+    @JsonProperty("timezone")
+    private long utcOffsetSeconds;
 
     @JsonProperty("sys")
-    private Sys sys;
+    private DaytimeInfo daytimeInfo;
 
     @JsonProperty("main")
-    private WeatherDetail main;
+    private WeatherMetrics weatherMetrics;
 
 
     @JsonProperty("weather")
-    private List<Weather> weather;
+    private List<WeatherCondition> weatherConditions;
+
+    private WeatherCondition weatherCondition;
+
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Weather {
+    public static class WeatherCondition {
         private String icon;
+        private String description;
 
     }
 
@@ -41,7 +48,7 @@ public class WeatherResponse {
 //    @ToString
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Sys {
+    public static class DaytimeInfo {
         private long sunrise;
         private long sunset;
 
@@ -52,7 +59,7 @@ public class WeatherResponse {
 //    @ToString
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class WeatherDetail {
+    public static class WeatherMetrics {
         private double temp;
         @JsonProperty("feels_like")
         private double feelsLike;
