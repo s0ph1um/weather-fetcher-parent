@@ -28,14 +28,18 @@
           factory-method="init">
     </bean>
 
+    <bean id="queryParams" class="com.wfproject.rest.impl.OpenWeatherQueryParams">
+        <argument value="${apiKey}"/>
+        <argument value="${measureUnits}"/>
+    </bean>
+
     <bean id="weatherServiceBean" class="com.wfproject.rest.impl.WeatherServiceImpl">
         <argument ref="weatherMapper"/>
         <argument ref="weatherApi"/>
-        <argument value="${apiKey}"/>
-        <argument value="${units}"/>
+        <argument ref="queryParams"/>
+<!--        <argument value="${apiKey}"/>-->
+<!--        <argument value="${measureUnits}"/>-->
     </bean>
-
-
 
     <cxf:bus>
         <cxf:features>
@@ -45,10 +49,9 @@
 
     <cm:property-placeholder persistent-id="api.properties" update-strategy="reload">
         <cm:default-properties>
-            <cm:property name="units" value="units"/>
+            <cm:property name="measureUnits" value="measureUnits"/>
             <cm:property name="apiKey" value="apiKey"/>
             <cm:property name="domainAddress" value="domainAddress"/>
         </cm:default-properties>
     </cm:property-placeholder>
-
 </blueprint>
