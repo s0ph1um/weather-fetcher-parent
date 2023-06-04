@@ -14,7 +14,6 @@ public interface WeatherResponseMapper {
         return Mappers.getMapper(WeatherResponseMapper.class);
     }
 
-    //    @Mappings({
     @Mapping(source = "measurementTimestamp", target = "measurementTimestamp")
     @Mapping(source = "utcOffsetSeconds", target = "utcOffsetSeconds")
     @Mapping(source = "daytimeInfo.sunrise", target = "sunrise")
@@ -27,10 +26,6 @@ public interface WeatherResponseMapper {
     @Mapping(source = "weatherMetrics.humidity", target = "humidity")
     @Mapping(source = "weatherCondition.icon", target = "icon")
     @Mapping(source = "weatherCondition.description", target = "weatherDescription")
-
-//            @Mapping(target = "icon", expression = "java(weatherResponse.getWeather().get(0).getIcon())")
-
-//    })
     WeatherResponseDto weatherResponseToWeatherResponseDto(WeatherResponse weatherResponse);
 
 }

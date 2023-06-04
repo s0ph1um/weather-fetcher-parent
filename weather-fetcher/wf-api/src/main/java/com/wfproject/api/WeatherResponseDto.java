@@ -4,11 +4,8 @@ import lombok.*;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
-//@Getter
-//@Setter
 @ToString // todo remove
 @Data
-//@JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherResponseDto {
 
     private double temp;
