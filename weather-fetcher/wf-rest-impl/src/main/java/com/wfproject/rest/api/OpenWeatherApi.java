@@ -1,6 +1,6 @@
-package com.wfproject.rest.impl;
+package com.wfproject.rest.api;
 
-import com.wfproject.rest.impl.model.WeatherResponse;
+import com.wfproject.rest.model.WeatherResponse;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

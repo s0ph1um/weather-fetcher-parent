@@ -1,4 +1,4 @@
-package com.wfproject.rest.impl.model;
+package com.wfproject.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

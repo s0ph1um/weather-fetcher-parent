@@ -1,7 +1,7 @@
-package com.wfproject.rest.impl.mapper;
+package com.wfproject.rest.mapper;
 
 import com.wfproject.api.WeatherResponseDto;
-import com.wfproject.rest.impl.model.WeatherResponse;
+import com.wfproject.rest.model.WeatherResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

@@ -6,12 +6,12 @@
     <repository>mvn:org.apache.cxf.karaf/apache-cxf/${apache-cxf.version}/xml/features</repository>
     <repository>mvn:org.apache.aries.jax.rs/org.apache.aries.jax.rs.features/${aries.jax.rs.whiteboard.version}/xml</repository>
 
-    <feature name="wf-api" version="${project.version}">
-        <bundle>mvn:com.wfproject/wf-api/${project.version}</bundle>
+    <feature name="wf-rest" version="${project.version}">
+        <bundle>mvn:com.wfproject/wf-rest/${project.version}</bundle>
     </feature>
     <feature name="weather-fetcher" version="${project.version}">
         <requirement>osgi.service;effective:=active;filter:=(objectClass=org.osgi.service.http.HttpService)</requirement>
-        <bundle>mvn:com.wfproject/wf-rest/${project.version}</bundle>
+        <bundle>mvn:com.wfproject/wf-rest-impl/${project.version}</bundle>
         <feature dependency="true">aries-blueprint</feature>
         <feature version="${apache-cxf.version}" dependency="true">cxf-jaxrs</feature>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${fasterxml-jackson.version}</bundle>
@@ -22,7 +22,7 @@
         <bundle dependency="true">mvn:org.mapstruct/mapstruct/${org.mapstruct.version}</bundle>
 
         <feature dependency="true">http</feature>
-        <feature version="${project.version}">wf-api</feature>
+        <feature version="${project.version}">wf-rest</feature>
 
         <configfile finalname="/etc/api.properties.cfg">mvn:com.wfproject/wf-provisioning/${project.version}/cfg/configuration</configfile>
     </feature>

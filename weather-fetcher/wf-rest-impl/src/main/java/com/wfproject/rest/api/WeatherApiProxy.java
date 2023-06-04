@@ -1,4 +1,4 @@
-package com.wfproject.rest.impl;
+package com.wfproject.rest.api;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;

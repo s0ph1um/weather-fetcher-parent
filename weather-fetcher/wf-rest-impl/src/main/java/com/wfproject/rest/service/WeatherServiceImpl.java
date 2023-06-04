@@ -1,15 +1,17 @@
-package com.wfproject.rest.impl;
+package com.wfproject.rest.service;
 
 import com.wfproject.api.WeatherResponseDto;
 import com.wfproject.api.WeatherService;
-import com.wfproject.rest.impl.mapper.WeatherResponseMapper;
-import com.wfproject.rest.impl.model.WeatherResponse;
+import com.wfproject.rest.api.ApiQueryParams;
+import com.wfproject.rest.api.OpenWeatherApi;
+import com.wfproject.rest.mapper.WeatherResponseMapper;
+import com.wfproject.rest.model.WeatherResponse;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class WeatherServiceImpl implements WeatherService {
 
-    private final OpenWeatherQueryParams queryParams;
+    private final ApiQueryParams queryParams;
     private final WeatherResponseMapper weatherResponseMapper;
     private final OpenWeatherApi weatherApi;
 

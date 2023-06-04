@@ -27,21 +27,21 @@
         </jaxrs:providers>
     </jaxrs:server>
 
-    <bean id="weatherApi" class="com.wfproject.rest.impl.WeatherApiProxy"
+    <bean id="weatherApi" class="com.wfproject.rest.api.WeatherApiProxy"
           factory-method="init">
         <argument value="${domainAddress}"/>
     </bean>
 
-    <bean id="weatherResponseMapper" class="com.wfproject.rest.impl.mapper.WeatherResponseMapper"
+    <bean id="weatherResponseMapper" class="com.wfproject.rest.mapper.WeatherResponseMapper"
           factory-method="init">
     </bean>
 
-    <bean id="queryParams" class="com.wfproject.rest.impl.OpenWeatherQueryParams">
+    <bean id="queryParams" class="com.wfproject.rest.api.ApiQueryParams">
         <argument value="${apiKey}"/>
         <argument value="${measureUnits}"/>
     </bean>
 
-    <bean id="weatherServiceBean" class="com.wfproject.rest.impl.WeatherServiceImpl">
+    <bean id="weatherServiceBean" class="com.wfproject.rest.service.WeatherServiceImpl">
         <argument ref="weatherResponseMapper"/>
         <argument ref="weatherApi"/>
         <argument ref="queryParams"/>
