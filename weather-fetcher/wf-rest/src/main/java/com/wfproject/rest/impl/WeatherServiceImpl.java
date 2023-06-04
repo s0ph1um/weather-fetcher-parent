@@ -15,7 +15,7 @@ public class WeatherServiceImpl implements WeatherService {
 
 
     @Override
-    public WeatherResponseDto getCurrentWeather(String countryCode, String city, String units) {
+    public WeatherResponseDto getCurrentWeather(String countryCode, String city) {
 
         String locationQuery = city.concat(",").concat(countryCode);
         WeatherResponse response =
@@ -23,7 +23,6 @@ public class WeatherServiceImpl implements WeatherService {
                         locationQuery,
                         queryParams.getMeasureUnits(),
                         queryParams.getApiKey());
-
 
         response.setWeatherCondition(response.getWeatherConditions().get(0));
 

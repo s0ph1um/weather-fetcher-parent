@@ -11,7 +11,6 @@ public interface WeatherService {
     @GET
     @Path("/currentWeather")
     WeatherResponseDto getCurrentWeather(@QueryParam("country") String countryCode,
-                                         @QueryParam("city") String city,
-                                         @QueryParam("units") String units) throws IOException;
+                                         @QueryParam("city") String city) throws IOException;
 
 }
