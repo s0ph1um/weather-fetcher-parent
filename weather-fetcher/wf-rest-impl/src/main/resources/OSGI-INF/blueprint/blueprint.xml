@@ -36,6 +36,8 @@
           factory-method="init">
     </bean>
 
+    <reference id="requestDataRepo" interface="com.wfproject.persistence.repository.RequestDataRepository"/>
+
     <bean id="queryParams" class="com.wfproject.rest.api.ApiQueryParams">
         <argument value="${apiKey}"/>
         <argument value="${measureUnits}"/>
@@ -45,6 +47,7 @@
         <argument ref="weatherResponseMapper"/>
         <argument ref="weatherApi"/>
         <argument ref="queryParams"/>
+        <argument ref="requestDataRepo"/>
     </bean>
 
     <cxf:bus>

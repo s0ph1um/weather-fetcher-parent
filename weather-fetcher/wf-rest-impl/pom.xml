@@ -46,6 +46,12 @@
             <version>${fasterxml-jackson.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.wfproject</groupId>
+            <artifactId>wf-jpa</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.osgi/org.osgi.service.cm &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>org.osgi</groupId>-->

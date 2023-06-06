@@ -16,6 +16,8 @@ public interface WeatherResponseMapper {
 
     @Mapping(source = "measurementTimestamp", target = "measurementTimestamp")
     @Mapping(source = "utcOffsetSeconds", target = "utcOffsetSeconds")
+    @Mapping(source = "apiResponseCode", target = "apiResponseCode")
+    @Mapping(source = "apiResponseMessage", target = "apiResponseMessage")
     @Mapping(source = "daytimeInfo.sunrise", target = "sunrise")
     @Mapping(source = "daytimeInfo.sunset", target = "sunset")
     @Mapping(source = "weatherMetrics.temp", target = "temp")

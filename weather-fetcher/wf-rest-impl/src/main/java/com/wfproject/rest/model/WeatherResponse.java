@@ -8,8 +8,6 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-//@Getter
-//@Setter
 @ToString // todo remove
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -33,6 +31,11 @@ public class WeatherResponse {
 
     private WeatherCondition weatherCondition;
 
+    @JsonProperty("cod")
+    private int apiResponseCode;
+
+    @JsonProperty("message")
+    private String apiResponseMessage;
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -42,10 +45,6 @@ public class WeatherResponse {
 
     }
 
-
-//    @Getter
-//    @Setter
-//    @ToString
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class DaytimeInfo {
@@ -54,9 +53,6 @@ public class WeatherResponse {
 
     }
 
-//    @Getter
-//    @Setter
-//    @ToString
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class WeatherMetrics {

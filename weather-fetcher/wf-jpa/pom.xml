@@ -10,6 +10,59 @@
     <artifactId>wf-jpa</artifactId>
     <packaging>bundle</packaging>
 
+    <dependencies>
 
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>${javax.persistence.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>${org.mariadb.jdbc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>javax.transaction-api</artifactId>
+            <version>${javax.transaction.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ops4j.pax.jdbc</groupId>
+            <artifactId>pax-jdbc-mariadb</artifactId>
+            <version>${org.ops4j.pax.jdbc.version}</version>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.hibernate</groupId>-->
+<!--            <artifactId>hibernate-osgi</artifactId>-->
+<!--            <version>${hibernate.version}</version>-->
+<!--        </dependency>-->
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${org.apache.felix.version}</version>
+                <configuration>
+                    <instructions>
+                        <Meta-Persistence>META-INF/persistence-descriptor.xml</Meta-Persistence>
+                        <Export-Package>com.wfproject.persistence.*</Export-Package>
+                        <Import-Package>
+                            javassist.util.proxy,
+                            org.hibernate.proxy,
+                            *
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

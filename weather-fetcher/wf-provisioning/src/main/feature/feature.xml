@@ -6,6 +6,24 @@
     <repository>mvn:org.apache.cxf.karaf/apache-cxf/${apache-cxf.version}/xml/features</repository>
     <repository>mvn:org.apache.aries.jax.rs/org.apache.aries.jax.rs.features/${aries.jax.rs.whiteboard.version}/xml</repository>
 
+    <feature name="wf-jpa" version="${project.version}">
+        <bundle dependency="true">mvn:org.mariadb.jdbc/mariadb-java-client/${org.mariadb.jdbc.version}</bundle>
+<!--        <feature>transaction</feature>-->
+        <feature dependency="true">jndi</feature>
+<!--        <feature>pax-jdbc-config</feature>-->
+        <feature dependency="true">pax-jdbc-pool-dbcp2</feature>
+        <feature dependency="true">jdbc</feature>
+        <feature dependency="true">aries-blueprint</feature>
+        <feature dependency="true">jpa</feature>
+        <feature dependency="true">hibernate</feature>
+        <feature dependency="true">pax-jdbc-config</feature>
+        <bundle>mvn:com.wfproject/wf-jpa/${project.version}</bundle>
+        <capability>
+<!--            osgi.service;objectClass=javax.sql.DataSource;effective:=active;osgi.jndi.service.name=request_stats_datasource-->
+            osgi.service;effective:=active;objectClass=javax.persistence.EntityManagerFactory;osgi.unit.name=request-stats-mariadb
+        </capability>
+    </feature>
+
     <feature name="wf-rest" version="${project.version}">
         <bundle>mvn:com.wfproject/wf-rest/${project.version}</bundle>
     </feature>
@@ -23,7 +41,9 @@
 
         <feature dependency="true">http</feature>
         <feature version="${project.version}">wf-rest</feature>
+        <feature version="${project.version}">wf-jpa</feature>
 
-        <configfile finalname="/etc/api.properties.cfg">mvn:com.wfproject/wf-provisioning/${project.version}/cfg/configuration</configfile>
+        <configfile finalname="/etc/api.properties.cfg">mvn:com.wfproject/wf-provisioning/${project.version}/cfg/api-configuration</configfile>
+        <configfile finalname="/etc/datasource.properties.cfg">mvn:com.wfproject/wf-provisioning/${project.version}/cfg/db-configuration</configfile>
     </feature>
 </features>

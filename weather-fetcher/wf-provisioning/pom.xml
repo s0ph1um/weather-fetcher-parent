@@ -10,7 +10,6 @@
     <artifactId>wf-provisioning</artifactId>
     <packaging>pom</packaging>
 
-
     <build>
         <resources>
             <resource>
@@ -51,7 +50,12 @@
                                 <artifact>
                                     <file>etc/api.properties.cfg</file>
                                     <type>cfg</type>
-                                    <classifier>configuration</classifier>
+                                    <classifier>api-configuration</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>etc/datasource.properties.cfg</file>
+                                    <type>cfg</type>
+                                    <classifier>db-configuration</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>
