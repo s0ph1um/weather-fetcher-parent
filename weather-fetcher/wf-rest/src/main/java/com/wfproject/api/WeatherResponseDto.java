@@ -4,7 +4,6 @@ import lombok.*;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
-@ToString // todo remove
 @Data
 public class WeatherResponseDto {
 

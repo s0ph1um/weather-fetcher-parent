@@ -3,6 +3,7 @@ services:
   db:
     image: mariadb:latest
     container_name: weatherstatsdb
+    hostname: weatherstatsdb
     environment:
       MYSQL_ROOT_PASSWORD: mysecretpass
       MYSQL_DATABASE: weatherstats

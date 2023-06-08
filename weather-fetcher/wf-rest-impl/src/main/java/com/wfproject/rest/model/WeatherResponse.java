@@ -8,7 +8,6 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString // todo remove
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherResponse {
