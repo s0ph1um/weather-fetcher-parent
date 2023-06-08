@@ -44,6 +44,7 @@ public class WeatherServiceImpl implements WeatherService {
                 ));
 
         System.out.println(response);
+        System.out.println("HELLO WORLD " + new Timestamp(System.currentTimeMillis()));
 
         return weatherResponseMapper.weatherResponseToWeatherResponseDto(response);
     }
