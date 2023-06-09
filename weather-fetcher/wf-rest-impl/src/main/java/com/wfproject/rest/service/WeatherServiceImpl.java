@@ -35,7 +35,7 @@ public class WeatherServiceImpl implements WeatherService {
                         .date(System.currentTimeMillis())
                         .code(response.getApiResponseCode())
                         .message(response.getApiResponseMessage())
-                        .isSuccessful(response.getApiResponseCode() == 200)
+                        .isSuccessful(response.getApiResponseCode() == Response.Status.OK.getStatusCode())
                         .build()
         );
 
@@ -45,9 +45,10 @@ public class WeatherServiceImpl implements WeatherService {
     private WeatherResponse getWeatherResponse(String countryCode, String city) {
 
         WeatherResponse apiResponse;
+        int alpha2CodeCharLimit = 2;
 
         try {
-            if (countryCode.length() != 2) {
+            if (countryCode.length() != alpha2CodeCharLimit) {
                 throw new WebApplicationException(
                         "Use alpha-2 country code as a 'country' parameter. E.g., FR, US (not FRA or USA)",
                         Response.Status.BAD_REQUEST);
