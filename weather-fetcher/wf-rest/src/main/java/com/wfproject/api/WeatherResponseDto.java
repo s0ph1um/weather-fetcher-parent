@@ -1,10 +1,10 @@
 package com.wfproject.api;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
-@AllArgsConstructor
-@RequiredArgsConstructor
 @Data
+@Builder
 public class WeatherResponseDto {
 
     private double temp;

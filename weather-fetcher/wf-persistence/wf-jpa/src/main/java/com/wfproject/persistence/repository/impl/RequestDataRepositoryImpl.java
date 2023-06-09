@@ -11,10 +11,9 @@ import javax.transaction.Transactional;
 @Transactional
 public class RequestDataRepositoryImpl implements RequestDataRepository {
 
-//    private final String PERSISTENCE_UNIT_NAME = "request-stats-mariadb";
+    private final String PERSISTENCE_UNIT_NAME = "request-stats-mariadb";
 
-    @PersistenceContext(unitName = "request-stats-mariadb")
-    @Setter
+    @PersistenceContext(unitName = PERSISTENCE_UNIT_NAME)
     private EntityManager entityManager;
 
     @Override

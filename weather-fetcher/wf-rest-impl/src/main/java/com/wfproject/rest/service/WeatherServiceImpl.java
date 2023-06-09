@@ -9,8 +9,10 @@ import com.wfproject.rest.api.OpenWeatherApi;
 import com.wfproject.rest.mapper.WeatherResponseMapper;
 import com.wfproject.rest.model.WeatherResponse;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 
-import java.sql.Timestamp;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 @AllArgsConstructor
 public class WeatherServiceImpl implements WeatherService {
@@ -20,33 +22,51 @@ public class WeatherServiceImpl implements WeatherService {
     private final OpenWeatherApi weatherApi;
     private final RequestDataRepository requestDataRepo;
 
-
     @Override
-    public WeatherResponseDto getCurrentWeather(String countryCode, String city) {
+    public WeatherResponseDto getCurrentWeather(@NonNull() String countryCode, @NonNull String city) {
 
-        String locationQuery = city.concat(",").concat(countryCode);
-        WeatherResponse response =
-                weatherApi.getCurrentWeather(
-                        locationQuery,
-                        queryParams.getMeasureUnits(),
-                        queryParams.getApiKey());
-
-        response.setWeatherCondition(response.getWeatherConditions().get(0));
-
-        requestDataRepo.save(new RequestData(
-                null,
-                city,
-                countryCode,
-                new Timestamp(System.currentTimeMillis()),
-                response.getApiResponseCode(),
-                response.getApiResponseMessage(),
-                response.getApiResponseCode() == 200
-                ));
-
+        WeatherResponse response = getWeatherResponse(countryCode, city);
         System.out.println(response);
-        System.out.println("1-HELLO WORLD " + new Timestamp(System.currentTimeMillis()));
+
+        requestDataRepo.save(
+                RequestData.builder()
+                        .city(city)
+                        .countryCode(countryCode)
+                        .date(System.currentTimeMillis())
+                        .code(response.getApiResponseCode())
+                        .message(response.getApiResponseMessage())
+                        .isSuccessful(response.getApiResponseCode() == 200)
+                        .build()
+        );
 
         return weatherResponseMapper.weatherResponseToWeatherResponseDto(response);
     }
 
+    private WeatherResponse getWeatherResponse(String countryCode, String city) {
+
+        WeatherResponse apiResponse;
+
+        try {
+            if (countryCode.length() != 2) {
+                throw new WebApplicationException(
+                        "Use alpha-2 country code as a 'country' parameter. E.g., FR, US (not FRA or USA)",
+                        Response.Status.BAD_REQUEST);
+            }
+
+            apiResponse = weatherApi.getCurrentWeather(
+                    city.concat(",").concat(countryCode),
+                    queryParams.getMeasureUnits(),
+                    queryParams.getApiKey());
+
+            apiResponse.setApiResponseMessage(Response.Status.OK.name());
+            apiResponse.setWeatherCondition(apiResponse.getWeatherConditions().get(0));
+
+        } catch (WebApplicationException exception) {
+            apiResponse = WeatherResponse.builder()
+                    .apiResponseCode(exception.getResponse().getStatus())
+                    .apiResponseMessage(exception.getMessage())
+                    .build();
+        }
+        return apiResponse;
+    }
 }

@@ -2,40 +2,33 @@ package com.wfproject.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
+@Builder
+@Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherResponse {
 
     @JsonProperty("dt")
     private long measurementTimestamp;
-
     @JsonProperty("timezone")
     private long utcOffsetSeconds;
-
     @JsonProperty("name")
     private String city;
-
     @JsonProperty("sys")
     private DaytimeInfo daytimeInfo;
-
     @JsonProperty("main")
     private WeatherMetrics weatherMetrics;
-
-
     @JsonProperty("weather")
     private List<WeatherCondition> weatherConditions;
-
     private WeatherCondition weatherCondition;
-
     @JsonProperty("cod")
     private int apiResponseCode;
-
     @JsonProperty("message")
     private String apiResponseMessage;
 
@@ -44,7 +37,6 @@ public class WeatherResponse {
     public static class WeatherCondition {
         private String icon;
         private String description;
-
     }
 
     @Data
@@ -53,7 +45,6 @@ public class WeatherResponse {
         private long sunrise;
         private long sunset;
         private String country;
-
     }
 
     @Data
@@ -68,6 +59,5 @@ public class WeatherResponse {
         private double tempMax;
         private double pressure;
         private double humidity;
-
     }
 }

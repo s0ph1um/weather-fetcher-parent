@@ -43,6 +43,5 @@ http://localhost:8181/cxf/weather/currentWeather?country=UA&city=Kyiv
 
 Parameters:
 
-**country**: alpha-2 code ([list of country codes](https://www.iban.com/country-codes))  
-
-**city**: city name
+**country**: country alpha-2 code ([list of country codes](https://www.iban.com/country-codes)), _[required]_  
+**city**: city name, _[optional]_
