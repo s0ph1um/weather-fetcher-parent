@@ -23,7 +23,7 @@ public class WeatherServiceImpl implements WeatherService {
     private final RequestDataRepository requestDataRepo;
 
     @Override
-    public WeatherResponseDto getCurrentWeather(@NonNull() String countryCode, @NonNull String city) {
+    public WeatherResponseDto getCurrentWeather(String countryCode, String city) {
 
         WeatherResponse response = getWeatherResponse(countryCode, city);
         System.out.println(response);
