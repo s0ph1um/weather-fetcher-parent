@@ -9,6 +9,7 @@ public class WeatherApiProxy {
 
     public static OpenWeatherApi init(String domainUrl) {
         System.out.println("WeatherApi " + domainUrl);
+        System.out.println("WeatherApiProxy has been successfully initialized");
         return JAXRSClientFactory.create(domainUrl,
                 OpenWeatherApi.class,
                 Collections.singletonList(new JacksonJsonProvider())

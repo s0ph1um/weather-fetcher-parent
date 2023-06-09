@@ -1,54 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="weather-fetcher-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
-<!--    <repository>-->
-<!--        mvn:org.apache.cxf.karaf/apache-cxf/${apache-cxf.version}/xml/features-->
-<!--    </repository>-->
-<!--    <repository>mvn:org.hibernate/hibernate-osgi/5.2.18.Final/xml/karaf</repository>-->
-<!--    <repository>-->
-<!--        mvn:org.apache.aries.jax.rs/org.apache.aries.jax.rs.features/${aries.jax.rs.whiteboard.version}/xml-->
-<!--    </repository>-->
-    <!--    <repository>-->
-    <!--        mvn:org.ops4j.pax.jdbc/pax-jdbc-features/1.5.0/xml/features-->
-    <!--    </repository>-->
-
-    <!--    <feature name="wf-jpa" version="${project.version}">-->
-    <!--        <feature>transaction</feature>-->
-    <!--        <feature>jpa</feature>-->
-    <!--        <feature>hibernate-orm</feature>-->
-    <!--        <bundle>wrap:mvn:org.mariadb.jdbc/mariadb-java-client/${mariabdb.client.version}</bundle>-->
-    <!--        <bundle>mvn:com.wfproject/wf-jpa/${project.version}</bundle>-->
-    <!--    </feature>-->
-
-<!--    <feature name="wf-rest" version="${project.version}">-->
-<!--        <bundle>mvn:com.wfproject/wf-rest/${project.version}</bundle>-->
-<!--    </feature>-->
-    <feature name="weather-fetcher" version="${project.version}">
-        <feature>aries-blueprint</feature>
-        <feature>http</feature>
-        <feature>cxf</feature>
+    <feature name="wf-persistence" version="${project.version}">
         <feature>transaction</feature>
         <feature>jpa</feature>
         <feature>hibernate-orm</feature>
-
-<!--        <bundle>mvn:com.fasterxml.jackson.core/jackson-core/${fasterxml-jackson.version}</bundle>-->
-<!--        <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/${fasterxml-jackson.version}</bundle>-->
-<!--        <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/${fasterxml-jackson.version}</bundle>-->
-<!--        <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/${fasterxml-jackson.version}</bundle>-->
-<!--        <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/${fasterxml-jackson.version}</bundle>-->
-        <bundle>wrap:mvn:org.mapstruct/mapstruct/${org.mapstruct.version}</bundle>
         <bundle>wrap:mvn:org.mariadb.jdbc/mariadb-java-client/${mariadb.client.version}</bundle>
 
-        <bundle>mvn:com.wfproject/wf-rest-impl/${project.version}</bundle>
-        <bundle>mvn:com.wfproject/wf-rest/${project.version}</bundle>
-        <bundle>mvn:com.wfproject/wf-datasource/${project.version}</bundle>
         <bundle>mvn:com.wfproject/wf-jpa/${project.version}</bundle>
+        <bundle>mvn:com.wfproject/wf-datasource/${project.version}</bundle>
+    </feature>
 
-<!--        <configfile finalname="/etc/api.properties.cfg">-->
-<!--            mvn:com.wfproject/wf-provisioning/${project.version}/cfg/api-configuration-->
-<!--        </configfile>-->
-<!--        <configfile finalname="/etc/datasource.properties.cfg">-->
-<!--            mvn:com.wfproject/wf-provisioning/${project.version}/cfg/db-configuration-->
-<!--        </configfile>-->
+    <feature name="wf-rest" version="${project.version}">
+        <feature>http</feature>
+        <feature>cxf</feature>
+        <bundle>mvn:org.mapstruct/mapstruct/${org.mapstruct.version}</bundle>
+
+        <bundle>mvn:com.wfproject/wf-rest/${project.version}</bundle>
+        <bundle>mvn:com.wfproject/wf-rest-impl/${project.version}</bundle>
+
+    </feature>
+    <feature name="weather-fetcher" version="${project.version}">
+        <feature>aries-blueprint</feature>
+
+        <feature>wf-rest</feature>
+        <feature>wf-persistence</feature>
+
+        <configfile override="true" finalname="/etc/api.properties.cfg">mvn:com.wfproject/wf-provisioning/${project.version}/cfg/api-configuration</configfile>
+        <configfile override="true" finalname="/etc/datasource.properties.cfg">mvn:com.wfproject/wf-provisioning/${project.version}/cfg/db-configuration</configfile>
     </feature>
 </features>

@@ -19,6 +19,8 @@ public class WeatherResponseDto {
     private String weatherDescription;
     private long measurementTimestamp;
     private long utcOffsetSeconds;
+    private String city;
+    private String country;
     private int apiResponseCode;
     private String apiResponseMessage;
 

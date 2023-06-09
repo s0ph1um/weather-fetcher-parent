@@ -13,9 +13,9 @@
 
     <cm:property-placeholder persistent-id="api.properties" update-strategy="reload">
         <cm:default-properties>
-            <cm:property name="measureUnits" value="metric"/>
-            <cm:property name="apiKey" value="dbb3fe174b786223a4226efa0713e335"/>
-            <cm:property name="domainAddress" value="http://api.openweathermap.org"/>
+            <cm:property name="measureUnits" value="${measureUnits}"/>
+            <cm:property name="apiKey" value="${apiKey}"/>
+            <cm:property name="domainAddress" value="${domainAddress}"/>
         </cm:default-properties>
     </cm:property-placeholder>
 

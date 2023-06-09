@@ -18,6 +18,9 @@ public class WeatherResponse {
     @JsonProperty("timezone")
     private long utcOffsetSeconds;
 
+    @JsonProperty("name")
+    private String city;
+
     @JsonProperty("sys")
     private DaytimeInfo daytimeInfo;
 
@@ -49,6 +52,7 @@ public class WeatherResponse {
     public static class DaytimeInfo {
         private long sunrise;
         private long sunset;
+        private String country;
 
     }
 

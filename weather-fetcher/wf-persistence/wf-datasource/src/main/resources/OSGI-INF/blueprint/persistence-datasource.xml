@@ -4,9 +4,9 @@
            xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.3.0">
     <cm:property-placeholder persistent-id="datasource.properties" update-strategy="reload">
         <cm:default-properties>
-            <cm:property name="datasourceUrl" value="jdbc:mariadb://localhost:3306/weatherstats"/>
-            <cm:property name="datasourceUser" value="statsuser"/>
-            <cm:property name="datasourcePassword" value="statspass"/>
+            <cm:property name="datasourceUrl" value="${datasourceUrl}"/>
+            <cm:property name="datasourceUser" value="${datasourceUser}"/>
+            <cm:property name="datasourcePassword" value="${datasourcePassword}"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
