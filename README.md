@@ -1,16 +1,26 @@
-### Prerequisites
+#### Table of Content:
+1. [Prerequisites](#1-prerequisites)
+2. [Filling out config files](#2-filling-out-config-files)
+3. [Create Database](#3-create-database)
+4. [Build the application from the sources](#4-build-the-application-from-the-sources)
+5. [Launch Karaf environment](#5-launch-karaf-environment)
+6. [Takeoff!](#6-takeoff)
+
+---
+
+### 1. Prerequisites
 1. Java OpenJDK version "1.8.0_372" (use your favorite package manager)
 2. Maven 3.6.3 for project build ([Download](https://maven.apache.org/docs/3.6.3/release-notes.html)).
    Alternatively, you can use generated Maven Wrapper
 3. Apache Karaf 4.2.2 as environment ([Download](https://karaf.apache.org/archives))
 4. Docker
 
-### Filling out config files
+### 2. Filling out config files
 To run this project you need two config files with API and DB properties ([navigate to folder](../weather-fetcher-parent/weather-fetcher/wf-provisioning/etc)).  
 Remove `template-` prefix for both and add missing parameters.  
 You can use defaults for database as long as you keep consistency with docker-compose values.
 
-### Create Database
+### 3. Create Database
 Create Database executing docker-compose file. Use [docker-compose.yml](../weather-fetcher-parent/docker-compose.yml):
 
 Start database:
@@ -26,18 +36,21 @@ docker-compose down
 `
 
 
-### Build the application from the sources
+### 4. Build the application from the sources
 Execute from the application [root](../weather-fetcher-parent):
+
 `
 mvn clean install
 `
 
 or execute Maven Wrapper script from the application [root](../weather-fetcher-parent):
+
 `
 ./mvnw clean install
 `
+
 ---
-### Launch Karaf environment <a id="start_karaf"></a>
+### 5. Launch Karaf environment
 Run following command from the Apache Karaf root folder (`clean` is an optional argument for "clean environment start"):
 ```
 bin/karaf clean
@@ -60,9 +73,10 @@ with files located in karaf-configs folder ([navigate locally](./weather-fetcher
 ${PROJECT_DIR}/weather-fetcher-parent/weather-fetcher/karaf-configs
 ``
 
-**NOTE:** do such overriding before karaf launching or make sure to do clean restart afterwards as described in [#Launch Karaf environment](#start_karaf) section
+**NOTE:** do such overriding before karaf launching or make sure to do clean restart afterwards as described in [#Launch Karaf environment](#launch-karaf-environment) section
 
 ---
+### 6. Takeoff
 
 On successful services creation you'll see `"WeatherApiProxy has been successfully initialized"` message in the console.
 
