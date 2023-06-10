@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+           xmlns:cxf="http://cxf.apache.org/blueprint/core"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xsi:schemaLocation="
+             http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+             http://cxf.apache.org/blueprint/jaxrs http://cxf.apache.org/schemas/blueprint/jaxrs.xsd
+             http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
+             http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd"
+           default-activation="lazy">
+
+    <cm:property-placeholder persistent-id="api.properties" update-strategy="reload">
+        <cm:default-properties>
+            <cm:property name="measureUnits" value="${measureUnits}"/>
+            <cm:property name="apiKey" value="${apiKey}"/>
+            <cm:property name="domainAddress" value="${domainAddress}"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
+
+    <jaxrs:server id="weatherRest" address="/weather">
+        <jaxrs:serviceBeans>
+            <ref component-id="weatherServiceBean"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+
+    <bean id="weatherApi" class="com.wfproject.rest.api.WeatherApiProxy"
+          factory-method="init">
+        <argument value="${domainAddress}"/>
+    </bean>
+
+    <bean id="weatherResponseMapper" class="com.wfproject.rest.mapper.WeatherResponseMapper"
+          factory-method="init">
+    </bean>
+
+    <reference id="requestDataRepo" interface="com.wfproject.persistence.repository.RequestDataRepository"/>
+
+    <bean id="queryParams" class="com.wfproject.rest.api.ApiQueryParams">
+        <argument value="${apiKey}"/>
+        <argument value="${measureUnits}"/>
+    </bean>
+
+    <bean id="weatherServiceBean" class="com.wfproject.rest.service.WeatherServiceImpl">
+        <argument ref="weatherResponseMapper"/>
+        <argument ref="weatherApi"/>
+        <argument ref="queryParams"/>
+        <argument ref="requestDataRepo"/>
+    </bean>
+
+    <cxf:bus>
+        <cxf:features>
+            <cxf:logging/>
+        </cxf:features>
+    </cxf:bus>
+
+</blueprint>

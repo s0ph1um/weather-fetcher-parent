@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+  db:
+    image: mariadb:latest
+    container_name: weatherstatsdb
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpass
+      MYSQL_DATABASE: weatherstats
+      MYSQL_USER: statsuser
+      MYSQL_PASSWORD: statspass
+    volumes:
+      - data:/var/lib/mysql
+    restart: on-failure
+    ports:
+      - "3306:3306"
+volumes:
+  data:

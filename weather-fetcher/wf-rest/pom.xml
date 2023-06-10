@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.wfproject</groupId>
         <artifactId>weather-fetcher</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>wf-rest</artifactId>
@@ -12,56 +12,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.wfproject</groupId>
-            <artifactId>wf-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-client</artifactId>
-            <version>${apache-cxf.version}</version>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>${apache-jax-rs.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-json-provider</artifactId>
-            <version>${fasterxml-jackson.version}</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-base</artifactId>
-            <version>${fasterxml-jackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${fasterxml-jackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${fasterxml-jackson.version}</version>
-        </dependency>
-
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.osgi/org.osgi.service.cm &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.osgi</groupId>-->
-<!--            <artifactId>org.osgi.service.cm</artifactId>-->
-<!--            <version>1.6.1</version>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.osgi/org.osgi.service.component.annotations &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.osgi</groupId>-->
-<!--            <artifactId>org.osgi.service.component.annotations</artifactId>-->
-<!--            <version>1.5.0</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-
-
     </dependencies>
 
     <build>
@@ -69,12 +27,10 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.9</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>com.wfproject.rest.impl.*</Export-Package>
-                        <Import-Package>*</Import-Package>
+                        <Export-Package>com.wfproject.api.*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
