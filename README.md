@@ -17,7 +17,7 @@
 
 ### 2. Filling out config files
 To run this project you need two config files with API and DB properties ([navigate to folder](../weather-fetcher-parent/weather-fetcher/wf-provisioning/etc)).  
-Remove `template-` prefix for both and add missing parameters.  
+[Generate](https://home.openweathermap.org/api_keys) your own API key or use existing one (if it isn't revoked yet).  
 You can use defaults for database as long as you keep consistency with docker-compose values.
 
 ### 3. Create Database
