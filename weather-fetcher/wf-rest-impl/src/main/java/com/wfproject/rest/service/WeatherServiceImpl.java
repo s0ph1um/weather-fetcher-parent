@@ -9,7 +9,6 @@ import com.wfproject.rest.api.OpenWeatherApi;
 import com.wfproject.rest.mapper.WeatherResponseMapper;
 import com.wfproject.rest.model.WeatherResponse;
 import lombok.AllArgsConstructor;
-import lombok.NonNull;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -26,7 +25,6 @@ public class WeatherServiceImpl implements WeatherService {
     public WeatherResponseDto getCurrentWeather(String countryCode, String city) {
 
         WeatherResponse response = getWeatherResponse(countryCode, city);
-        System.out.println(response);
 
         requestDataRepo.save(
                 RequestData.builder()
@@ -50,7 +48,9 @@ public class WeatherServiceImpl implements WeatherService {
         try {
             if (countryCode.length() != alpha2CodeCharLimit) {
                 throw new WebApplicationException(
-                        "Use alpha-2 country code as a 'country' parameter. E.g., FR, US (not FRA or USA)",
+                        Response.Status.BAD_REQUEST
+                                .getReasonPhrase()
+                                .concat(": Use alpha-2 country code as a 'country' parameter ('FR', 'US', etc)"),
                         Response.Status.BAD_REQUEST);
             }
 
@@ -59,7 +59,9 @@ public class WeatherServiceImpl implements WeatherService {
                     queryParams.getMeasureUnits(),
                     queryParams.getApiKey());
 
-            apiResponse.setApiResponseMessage(Response.Status.OK.name());
+            apiResponse.setApiResponseMessage(Response.Status.OK
+                    .getReasonPhrase()
+                    .concat(": Weather Information response was successfully returned"));
             apiResponse.setWeatherCondition(apiResponse.getWeatherConditions().get(0));
 
         } catch (WebApplicationException exception) {

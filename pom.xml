@@ -11,6 +11,7 @@
 
     <modules>
         <module>weather-fetcher</module>
+        <module>weather-fetcher-stats</module>
     </modules>
 
 </project>
