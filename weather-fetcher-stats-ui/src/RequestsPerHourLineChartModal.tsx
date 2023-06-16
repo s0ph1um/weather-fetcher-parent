@@ -23,7 +23,7 @@ const countRequestsByHour = (requests: RequestData[]): Map<number, number> => {
     return new Map([...counts.entries()].sort((a, b) => a[0] - b[0]));
 };
 
-const RequestsPerHourLineChartModal = ({requests}: { requests: RequestData[] }) => {
+const RequestsPerHourLineChartModal = ({requests, disabled}: { requests: RequestData[], disabled: boolean }) => {
     const [open, setOpen] = useState(false);
     const classes = useStyles();
 
@@ -44,7 +44,7 @@ const RequestsPerHourLineChartModal = ({requests}: { requests: RequestData[] }) 
 
     return (
         <div>
-            <Button variant="contained" color={'info'} onClick={handleOpen}>
+            <Button variant={"contained"} color={'info'} onClick={handleOpen} disabled={disabled}>
                 Requests per hour
             </Button>
 

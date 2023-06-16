@@ -7,7 +7,7 @@ import {
     TableBody,
     Paper,
     TablePagination,
-    TableSortLabel, CircularProgress, Alert, TextField, Grid, Container,
+    TableSortLabel, CircularProgress, Alert, TextField, Grid, Container, Box,
 } from '@mui/material';
 
 import {makeStyles} from "@mui/styles";
@@ -22,34 +22,41 @@ import {RequestTablePagination} from "./RequestTablePagination";
 import {VisualizationBlock} from "./VisualizationBlock";
 import {RequestTableHead} from "./RequestTableHead";
 import {RequestTableItem} from "./RequestTableItem";
+import Button from "@mui/material/Button";
+import {green} from "@mui/material/colors";
 
 const App: React.FC = () => {
-    const [requests, setRequests] = useState<RequestData[]>([]);
     const [totalElements, setTotalElements] = useState(0);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(15);
     const [sortField, setSortField] = useState('date');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState('');
+
+    const [appData, setAppData] =
+        useState<{ requests: RequestData[], loading: boolean, error: string }>({
+            requests: [],
+            loading: false,
+            error: ''
+        });
 
     const classes = useStyles()
     const handleFetchRequestsCallback = useCallback(() => {
 
         const fetchRequests = async () => {
-            setLoading(true)
+            setAppData({...appData, loading: true})
             const response =
                 await fetch(
                     `${config.WF_STATS_URL}:${config.WF_STATS_PORT}${config.LIST_REQUEST_STATS_ENDPOINT}?page=${page}&size=${rowsPerPage}&sortBy=${sortField}&order=${sortOrder}`
                 );
             const data: ApiResponse = await response.json();
-            setRequests(data.content);
+
+            setAppData({...appData, requests: data.content, loading: false})
+
             setTotalElements(data.totalElements);
-            setLoading(false)
         };
 
         fetchRequests().catch(reason => {
-            setError(reason.message)
+            setAppData({...appData, error: reason.message})
         })
 
     }, [page, rowsPerPage, sortField, sortOrder]);
@@ -66,13 +73,28 @@ const App: React.FC = () => {
 
     return (
         <Grid container>
-            <Paper elevation={5}>
-                <VisualizationBlock requests={requests}/>
-            </Paper>
+            <Grid item zeroMinWidth>
+                <Paper elevation={5}>
+                    <VisualizationBlock requests={appData.requests} disabled={appData.loading}/>
+                </Paper>
+            </Grid>
+            <Grid item xs>
+                <Box display="flex" justifyContent="flex-end">
+
+                    <Button variant="contained"
+                            color={'warning'}
+                            disabled={appData.loading}
+                            onClick={handleFetchRequestsCallback}>
+                        Reload
+                    </Button>
+                </Box>
+            </Grid>
+
+
             <Paper elevation={5} className={classes.root}>
-                {error && (
+                {appData.error && (
                     <Alert severity="error">
-                        {error}
+                        {appData?.error}
                     </Alert>
                 )}
                 <Table className={classes.table}>
@@ -81,12 +103,12 @@ const App: React.FC = () => {
                         sortOrder={sortOrder}
                         handleSort={handleSort}
                     />
-                    {loading ? (
+                    {appData.loading ? (
                         <TableCell colSpan={7} align="center">
                             <CircularProgress/>
                         </TableCell>
                     ) : (
-                        requests.map((request, index) => (
+                        appData?.requests.map((request, index) => (
                             <RequestTableItem request={request} index={index}/>
                         ))
                     )}

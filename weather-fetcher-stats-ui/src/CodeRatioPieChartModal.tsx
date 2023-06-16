@@ -7,11 +7,7 @@ import {useStyles} from "./constants/styles";
 import {RequestData} from "./models/RequestData";
 
 
-interface CodeRatioPieChartModalProps {
-    requests: RequestData[];
-}
-
-const CodeRatioPieChartModal: React.FC<CodeRatioPieChartModalProps> = ({requests}) => {
+const CodeRatioPieChartModal = ({requests, disabled}: {requests: RequestData[], disabled: boolean}) => {
     const [open, setOpen] = useState(false);
     const classes = useStyles();
 
@@ -98,7 +94,7 @@ const CodeRatioPieChartModal: React.FC<CodeRatioPieChartModalProps> = ({requests
 
     return (
         <div>
-            <Button onClick={handleOpen} variant="contained" color="info">
+            <Button onClick={handleOpen} variant={"contained"} color={"info"} disabled={disabled}>
                 Response Code Ratio
             </Button>
             <Modal open={open} onClose={handleClose} className={classes.modalWindow}>

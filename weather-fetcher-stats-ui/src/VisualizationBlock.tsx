@@ -4,13 +4,13 @@ import CodeRatioPieChartModal from "./CodeRatioPieChartModal";
 import React from "react";
 import {useStyles} from "./constants/styles";
 
-export const VisualizationBlock = ({requests}: { requests: RequestData[] }) => {
+export const VisualizationBlock = ({requests, disabled}: { requests: RequestData[], disabled: boolean }) => {
 
     return (
         <div className={useStyles().visualizationBlock}>
             <span>Visualization:</span>
-            <RequestsPerHourLineChartModal requests={requests}/>
-            <CodeRatioPieChartModal requests={requests}/>
+            <RequestsPerHourLineChartModal requests={requests} disabled={disabled}/>
+            <CodeRatioPieChartModal requests={requests} disabled={disabled}/>
         </div>
     )
 }
