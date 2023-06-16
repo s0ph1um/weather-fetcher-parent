@@ -3,21 +3,11 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label} from 'recharts';
 import {useStyles} from "./constants/styles";
-
-interface RequestData {
-    id: number;
-    city: string;
-    countryCode: string;
-    date: number;
-    code: number;
-    message: string;
-    successful: boolean;
-}
+import {RequestData} from "./models/RequestData";
 
 
 const countRequestsByHour = (requests: RequestData[]): Map<number, number> => {
     const counts = new Map<number, number>();
-
 
     requests.forEach((request) => {
         const date = new Date(request.date);
@@ -29,8 +19,6 @@ const countRequestsByHour = (requests: RequestData[]): Map<number, number> => {
             counts.set(hour, 1);
         }
     });
-
-    console.log(counts)
 
     return new Map([...counts.entries()].sort((a, b) => a[0] - b[0]));
 };

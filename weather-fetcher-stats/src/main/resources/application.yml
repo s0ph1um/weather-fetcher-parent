@@ -3,13 +3,11 @@ spring:
     url: jdbc:mariadb://localhost:3306/weatherstats
     username: statsuser
     password: statspass
-jpa:
-  hibernate:
-    ddl-auto: update
-properties:
-  hibernate:
-    dialect: org.hibernate.dialect.MariaDB10Dialect
-    format_sql: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      dialect: org.hibernate.dialect.MariaDB10Dialect
     show-sql: true
 server:
   port: 8082

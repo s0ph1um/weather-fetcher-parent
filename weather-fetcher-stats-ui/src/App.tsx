@@ -16,22 +16,8 @@ import {config} from "./constants/config";
 import RequestsPerHourLineChartModal from "./RequestsPerHourLineChartModal";
 import CodeRatioPieChartModal from "./CodeRatioPieChartModal";
 import {useStyles} from "./constants/styles";
-
-
-interface RequestData {
-    id: number;
-    city: string;
-    countryCode: string;
-    date: number;
-    code: number;
-    message: string;
-    successful: boolean;
-}
-
-interface ApiResponse {
-    content: RequestData[];
-    totalElements: number;
-}
+import {RequestData} from "./models/RequestData";
+import {ApiResponse} from "./models/RequestApiResponse";
 
 const App: React.FC = () => {
     const classes = useStyles();
@@ -70,10 +56,6 @@ const App: React.FC = () => {
         handleFetchRequestsCallback()
     }, [handleFetchRequestsCallback])
 
-    function onButtonClick() {
-        countRequestPerHour(requests)
-        console.log(requestPerHour)
-    }
 
     function countRequestPerHour(requests: RequestData[]): void {
         const counts = new Map<number, number>();
@@ -92,8 +74,6 @@ const App: React.FC = () => {
         });
 
         setRequestPerHour(counts)
-        // console.log(counts)
-        // return counts;
     }
 
     const handleChangePage = (event: unknown, newPage: number) => {
