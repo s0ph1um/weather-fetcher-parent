@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label} from 'recharts';
-import {useStyles} from "./constants/styles";
 import {RequestData} from "./models/RequestData";
+import {useStyles} from "./constants/styles";
 
 
 const countRequestsByHour = (requests: RequestData[]): Map<number, number> => {
@@ -48,8 +48,7 @@ const RequestsPerHourLineChartModal = ({requests}: { requests: RequestData[] }) 
                 Requests per hour
             </Button>
 
-            <Modal open={open} onClose={handleClose}
-                   className={classes.modalWindow}>
+            <Modal open={open} onClose={handleClose} className={classes.modalWindow}>
                 <div>
 
                     <div className={classes.chartContent}>
@@ -65,8 +64,8 @@ const RequestsPerHourLineChartModal = ({requests}: { requests: RequestData[] }) 
                             <Legend/>
                             <Line type="monotone" dataKey="requests" stroke="#8884d8"/>
                         </LineChart>
+                        <hr/>
                         <span>Requests per hour (sample of {requests.length} unit(s))</span>
-
                     </div>
                 </div>
             </Modal>

@@ -4,17 +4,8 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import {constants} from "./constants/constants";
 import {useStyles} from "./constants/styles";
+import {RequestData} from "./models/RequestData";
 
-
-interface RequestData {
-    id: number;
-    city: string;
-    countryCode: string;
-    date: number;
-    code: number;
-    message: string;
-    successful: boolean;
-}
 
 interface CodeRatioPieChartModalProps {
     requests: RequestData[];
@@ -45,12 +36,10 @@ const CodeRatioPieChartModal: React.FC<CodeRatioPieChartModalProps> = ({requests
             }
         });
 
-        console.log(counts)
-
         return counts;
     };
 
-    let renderLabel = function(entry: RequestData) {
+    let renderLabel = function (entry: RequestData) {
         return `Code: ${entry.code}`;
     }
 
@@ -62,22 +51,17 @@ const CodeRatioPieChartModal: React.FC<CodeRatioPieChartModalProps> = ({requests
         return hexColor;
     };
 
-    const CustomTooltip: React.FC<any> = ({ active, payload }) => {
+    const CustomTooltip: React.FC<any> = ({active, payload}) => {
         if (active) {
             console.log(payload)
             return (
-                <div
-                    className={classes.tooltip}
-                >
-                    {/*<label>{`${payload[0].value} : ${payload[0].payload.message}`}</label>*/}
-
+                <div className={classes.tooltip}>
                     <label>{`Code: ${payload[0].payload.code}, requests total: ${payload[0].value}`}</label>
-
                 </div>
-        );
+            );
         }
         return null;
-        };
+    };
 
     const renderChart = () => {
         const counts = countRequestsByCode();
@@ -88,7 +72,6 @@ const CodeRatioPieChartModal: React.FC<CodeRatioPieChartModalProps> = ({requests
                     count,
                     percent: `${Math.floor((count / requests.length) * 100)}%`,
                     color: generateRandomColor()
-                    // message: requests.find((request) => request.code)?.message,
                 }));
 
         return (
@@ -96,7 +79,6 @@ const CodeRatioPieChartModal: React.FC<CodeRatioPieChartModalProps> = ({requests
                 <Pie
                     dataKey="count"
                     nameKey="percent"
-                    // valueKey="code"
                     isAnimationActive={true}
                     data={data}
                     cx="50%"
@@ -109,7 +91,7 @@ const CodeRatioPieChartModal: React.FC<CodeRatioPieChartModalProps> = ({requests
                     ))}
                 </Pie>
                 <Legend/>
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip/>}/>
             </PieChart>
         );
     };
@@ -119,13 +101,13 @@ const CodeRatioPieChartModal: React.FC<CodeRatioPieChartModalProps> = ({requests
             <Button onClick={handleOpen} variant="contained" color="info">
                 Response Code Ratio
             </Button>
-            <Modal open={open} onClose={handleClose} style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                    <div
-                        style={{backgroundColor: '#FFFFFF', padding: '20px', border: "5px solid #cccc"}}
-                    >
-                        {renderChart()}
-                        <span>Response code ratio (sample of {requests.length} unit(s))</span>
-                    </div>
+            <Modal open={open} onClose={handleClose} className={classes.modalWindow}>
+                <div className={classes.chartContent}
+                >
+                    {renderChart()}
+                    <hr/>
+                    <span>Response code ratio (sample of {requests.length} unit(s))</span>
+                </div>
             </Modal>
         </div>
     );
