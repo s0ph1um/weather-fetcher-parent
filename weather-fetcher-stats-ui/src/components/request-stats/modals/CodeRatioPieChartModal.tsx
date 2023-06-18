@@ -1,15 +1,14 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {PieChart, Pie, Cell, Tooltip, Legend} from "recharts";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import {constants} from "./constants/constants";
-import {useStyles} from "./constants/styles";
-import {RequestData} from "./models/RequestData";
-import {ModalContext} from "./context/ModalContext";
+import {constants} from "../../../constants/constants";
+import {useStyles} from "../../../constants/styles";
+import {RequestData} from "../../../types/RequestData";
 
 
 const CodeRatioPieChartModal = ({requests, disabled}: { requests: RequestData[], disabled: boolean }) => {
-    const {opened, openModal, closeModal} = useContext(ModalContext)
+    const [modalOpened, setModalOpened] = useState(false);
     const classes = useStyles();
 
     const countRequestsByCode = (): Map<string, number> => {
@@ -48,8 +47,6 @@ const CodeRatioPieChartModal = ({requests, disabled}: { requests: RequestData[],
         return null;
     };
 
-    console.log("CodeRatioPieChartModal")
-
     const renderChart = () => {
         const counts = countRequestsByCode();
         const data =
@@ -84,10 +81,10 @@ const CodeRatioPieChartModal = ({requests, disabled}: { requests: RequestData[],
 
     return (
         <div>
-            <Button onClick={openModal} variant={"contained"} color={"info"} disabled={disabled}>
+            <Button onClick={() => setModalOpened(true)} variant={"contained"} color={"info"} disabled={disabled}>
                 Response Code Ratio
             </Button>
-            <Modal open={opened} onClose={closeModal} className={classes.modalWindow}>
+            <Modal open={modalOpened} onClose={() => setModalOpened(false)} className={classes.modalWindow}>
                 <div className={classes.chartContent}>
                     {renderChart()}
                     <hr/>

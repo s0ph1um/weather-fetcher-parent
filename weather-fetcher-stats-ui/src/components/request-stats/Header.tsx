@@ -1,8 +1,8 @@
 import {Box, Grid, Paper} from "@mui/material";
-import {VisualizationBlock} from "./VisualizationBlock";
+import {RequestsVisualization} from "./modals/RequestsVisualization";
 import Button from "@mui/material/Button";
 import React from "react";
-import {RequestData} from "./models/RequestData";
+import {RequestData} from "../../types/RequestData";
 
 interface HeaderProps {
     appData: { requests: RequestData[], loading: boolean, error: string },
@@ -13,8 +13,8 @@ export const Header = ({appData, handleFetchRequestsCallback}: HeaderProps) => (
     <>
         <Grid item zeroMinWidth>
             <Paper elevation={5}>
-                <VisualizationBlock requests={appData.requests}
-                                    disabled={appData.loading || appData.error.length != 0}
+                <RequestsVisualization requests={appData.requests}
+                                       disabled={appData.loading || appData.error.length != 0}
                 />
             </Paper>
         </Grid>

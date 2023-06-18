@@ -1,10 +1,9 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label} from 'recharts';
-import {RequestData} from "./models/RequestData";
-import {useStyles} from "./constants/styles";
-import {ModalContext} from "./context/ModalContext";
+import {RequestData} from "../../../types/RequestData";
+import {useStyles} from "../../../constants/styles";
 
 
 const countRequestsByHour = (requests: RequestData[]): Map<number, number> => {
@@ -23,22 +22,21 @@ const countRequestsByHour = (requests: RequestData[]): Map<number, number> => {
 
 const RequestsPerHourLineChartModal = ({requests, disabled}: { requests: RequestData[], disabled: boolean }) => {
     const classes = useStyles();
-    const {opened, openModal, closeModal} = useContext(ModalContext)
+    const [modalOpened, setModalOpened] = useState(false);
+
     const counts = countRequestsByHour(requests);
     const data = Array.from(counts.entries()).map(([hour, requests]) => ({
         hour,
         requests,
     }));
 
-    console.log("RequestsPerHourLineChartModal")
-
     return (
         <div>
-            <Button variant={"contained"} color={'info'} onClick={openModal} disabled={disabled}>
+            <Button variant={"contained"} color={'info'} onClick={() => setModalOpened(true)} disabled={disabled}>
                 Requests per hour
             </Button>
 
-            <Modal open={opened} onClose={closeModal} className={classes.modalWindow}>
+            <Modal open={modalOpened} onClose={() => setModalOpened(false)} className={classes.modalWindow}>
                 <div>
 
                     <div className={classes.chartContent}>

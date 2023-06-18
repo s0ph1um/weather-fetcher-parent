@@ -1,7 +1,7 @@
 import {TablePagination} from "@mui/material";
 import React from "react";
-import {useStyles} from "./constants/styles";
-import {PaginationProps} from "./models/PaginationProps";
+import {useStyles} from "../../../constants/styles";
+import {PaginationProps} from "../../../types/props/PaginationProps";
 
 export const RequestTablePagination = ({
                                            totalElements,

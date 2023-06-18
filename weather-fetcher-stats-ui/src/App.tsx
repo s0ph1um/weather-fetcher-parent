@@ -1,6 +1,6 @@
 import {Route, Routes} from 'react-router-dom'
 import React from 'react';
-import {RequestStatsPage} from "./RequestStatsPage";
+import {RequestStatsPage} from "./components/request-stats/RequestStatsPage";
 
 const App: React.FC = () => (
     <Routes>

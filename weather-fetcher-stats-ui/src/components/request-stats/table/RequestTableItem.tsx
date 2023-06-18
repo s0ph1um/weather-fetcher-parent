@@ -1,7 +1,7 @@
-import {RequestData} from "./models/RequestData";
+import {RequestData} from "../../../types/RequestData";
 import {TableCell, TableRow} from "@mui/material";
 import React from "react";
-import {useStyles} from "./constants/styles";
+import {useStyles} from "../../../constants/styles";
 
 export const RequestTableItem = ({request, index}: { request: RequestData, index: number }) => {
     const classes = useStyles()

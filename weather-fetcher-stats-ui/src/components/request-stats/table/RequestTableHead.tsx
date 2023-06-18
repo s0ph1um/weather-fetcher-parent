@@ -1,6 +1,6 @@
 import {TableCell, TableHead, TableRow, TableSortLabel} from "@mui/material";
 import React from "react";
-import {useStyles} from "./constants/styles";
+import {useStyles} from "../../../constants/styles";
 
 interface HeaderSortProps {
     sortField: string,
