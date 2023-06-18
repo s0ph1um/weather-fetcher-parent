@@ -28,7 +28,7 @@ export const useStyles = makeStyles(() =>
                 marginLeft: '5px'
             },
             fontSize: '18px',
-            marginLeft: '5px'
+            padding: '3px'
         },
         modalWindow: {
             display: 'flex',

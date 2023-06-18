@@ -1,14 +1,7 @@
 import {TablePagination} from "@mui/material";
 import React from "react";
 import {useStyles} from "./constants/styles";
-
-interface PaginationProps {
-    page: number,
-    setPage: (page: number) => void,
-    rowsPerPage: number,
-    setRowsPerPage: (page: number) => void
-    totalElements: number,
-}
+import {PaginationProps} from "./models/PaginationProps";
 
 export const RequestTablePagination = ({
                                            totalElements,
