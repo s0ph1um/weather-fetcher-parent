@@ -3,7 +3,6 @@ import {RequestTable} from "./table/RequestTable";
 import {Grid} from "@mui/material";
 import React, {useState} from "react";
 import {useFetchRequestStats} from "../../hooks/useFetchRequestStats";
-import {config} from "../../constants/config";
 
 export const RequestStatsPage = () => {
 
@@ -12,10 +11,18 @@ export const RequestStatsPage = () => {
     const [sortField, setSortField] = useState('date');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
-    const url = `${config.WF_STATS_URL}:${config.WF_STATS_PORT}${config.LIST_REQUEST_STATS_ENDPOINT}?
-                    page=${page}&size=${rowsPerPage}&sortBy=${sortField}&order=${sortOrder}`
-
-    const {appData, totalElements, handleFetchRequestsCallback} = useFetchRequestStats(url)
+    const {
+        appData,
+        setAppData,
+        totalElements,
+        handleFetchRequestsCallback
+    } =
+        useFetchRequestStats({
+            page,
+            rowsPerPage,
+            sortField,
+            sortOrder
+        })
 
     return (
         <Grid container>
@@ -23,7 +30,7 @@ export const RequestStatsPage = () => {
             <RequestTable
                 paginationProps={{page, setPage, rowsPerPage, setRowsPerPage, totalElements}}
                 tableSortProps={{sortField, setSortField, sortOrder, setSortOrder}}
-                appData={appData}
+                appData={appData} setAppData={setAppData}
             />
         </Grid>
     )

@@ -1,6 +1,6 @@
 import {RequestData} from "./RequestData";
 
-export interface ApiResponse {
+export interface RequestApiResponse {
     content: RequestData[];
     totalElements: number;
 }

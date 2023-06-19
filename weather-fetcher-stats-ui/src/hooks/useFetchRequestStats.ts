@@ -1,8 +1,10 @@
 import {useCallback, useEffect, useState} from "react";
-import {ApiResponse} from "../types/RequestApiResponse";
 import {RequestData} from "../types/RequestData";
+import requestService from "../services/RequestService"
+import {RequestStatsProps} from "../types/props/RequestStatsProps";
 
-export const useFetchRequestStats = (url: string) => {
+
+export const useFetchRequestStats = (requestStatsProps: RequestStatsProps) => {
 
     const [appData, setAppData] =
         useState<{ requests: RequestData[], loading: boolean, error: string }>({
@@ -12,25 +14,23 @@ export const useFetchRequestStats = (url: string) => {
         });
     const [totalElements, setTotalElements] = useState(0);
 
-
     const handleFetchRequestsCallback = useCallback(() => {
-        const fetchRequests = async () => {
-            setAppData({...appData, loading: true})
-            const response = await fetch(url);
-            const data: ApiResponse = await response.json();
-            setTotalElements(data.totalElements);
-            setAppData({...appData, requests: data.content, loading: false})
-        };
+        setAppData({...appData, loading: true})
+        requestService.fetchRequests({...requestStatsProps})
+            .then(data => {
+                setTotalElements(data.totalElements)
+                setAppData({...appData, requests: data.content, loading: false})
+            })
+            .catch((reason: Error) => {
+                console.error(reason.message);
+                setAppData({...appData, error: `${reason.message}. Try later`})
+            })
 
-        fetchRequests().catch(reason => {
-            setAppData({...appData, error: `${reason.message}. Try later`})
-        })
-
-    }, [url]);
+    }, [requestStatsProps.page, requestStatsProps.rowsPerPage, requestStatsProps.sortOrder]);
 
     useEffect(() => {
         handleFetchRequestsCallback()
     }, [handleFetchRequestsCallback])
 
-    return {appData, totalElements, handleFetchRequestsCallback}
+    return {appData, setAppData, totalElements, handleFetchRequestsCallback}
 }

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label} from 'recharts';
@@ -12,7 +12,7 @@ const countRequestsByHour = (requests: RequestData[]): Map<number, number> => {
         const date = new Date(request.date);
         const hour = date.getHours();
         if (counts.has(hour)) {
-            counts.set(hour, counts.get(hour)! + 1);
+            counts.set(hour, Number(counts.get(hour)) + 1);
         } else {
             counts.set(hour, 1);
         }
@@ -35,10 +35,8 @@ const RequestsPerHourLineChartModal = ({requests, disabled}: { requests: Request
             <Button variant={"contained"} color={'info'} onClick={() => setModalOpened(true)} disabled={disabled}>
                 Requests per hour
             </Button>
-
             <Modal open={modalOpened} onClose={() => setModalOpened(false)} className={classes.modalWindow}>
                 <div>
-
                     <div className={classes.chartContent}>
                         <LineChart width={500} height={400} data={data}>
                             <CartesianGrid strokeDasharray="3 3"/>

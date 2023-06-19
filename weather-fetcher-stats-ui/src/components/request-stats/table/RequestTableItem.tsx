@@ -2,8 +2,13 @@ import {RequestData} from "../../../types/RequestData";
 import {TableCell, TableRow} from "@mui/material";
 import React from "react";
 import {useStyles} from "../../../constants/styles";
+import Button from "@mui/material/Button";
 
-export const RequestTableItem = ({request, index}: { request: RequestData, index: number }) => {
+export const RequestTableItem = ({request, index, handleDelete}: {
+    request: RequestData,
+    index: number,
+    handleDelete: (id: number) => void
+}) => {
     const classes = useStyles()
 
     return (
@@ -22,6 +27,11 @@ export const RequestTableItem = ({request, index}: { request: RequestData, index
                 <span style={{color: request.successful ? 'green' : 'red'}}>
                     {request.successful ? 'Yes' : 'No'}
                 </span>
+            </TableCell>
+            <TableCell>
+                <Button variant="outlined" color="warning" onClick={() => handleDelete(request.id)}>
+                    x
+                </Button>
             </TableCell>
         </TableRow>
     )

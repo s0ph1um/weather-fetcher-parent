@@ -82,6 +82,9 @@ export const RequestTableHead = ({
                         Successful
                     </TableSortLabel>
                 </TableCell>
+                <TableCell className={classes.tableCell}>
+                    Delete
+                </TableCell>
             </TableRow>
         </TableHead>
     )

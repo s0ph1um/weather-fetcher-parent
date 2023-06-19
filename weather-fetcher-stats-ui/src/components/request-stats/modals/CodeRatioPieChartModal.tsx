@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import {PieChart, Pie, Cell, Tooltip, Legend} from "recharts";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -16,7 +16,7 @@ const CodeRatioPieChartModal = ({requests, disabled}: { requests: RequestData[],
         requests.forEach((request) => {
             const code = request.code.toString();
             if (counts.has(code)) {
-                counts.set(code, counts.get(code)! + 1);
+                counts.set(code, 1 + Number(counts.get(code)));
             } else {
                 counts.set(code, 1);
             }
@@ -24,7 +24,7 @@ const CodeRatioPieChartModal = ({requests, disabled}: { requests: RequestData[],
         return counts;
     };
 
-    let renderLabel = function (entry: RequestData) {
+    const renderLabel = function (entry: RequestData) {
         return `Code: ${entry.code}`;
     }
 
@@ -36,7 +36,7 @@ const CodeRatioPieChartModal = ({requests, disabled}: { requests: RequestData[],
         return hexColor;
     };
 
-    const CustomTooltip: React.FC<any> = ({active, payload}) => {
+    const CustomTooltip = ({active, payload}: any) => {
         if (active) {
             return (
                 <div className={classes.tooltip}>

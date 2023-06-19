@@ -1,5 +1,5 @@
-import {TablePagination} from "@mui/material";
 import React from "react";
+import {TablePagination} from "@mui/material";
 import {useStyles} from "../../../constants/styles";
 import {PaginationProps} from "../../../types/props/PaginationProps";
 
