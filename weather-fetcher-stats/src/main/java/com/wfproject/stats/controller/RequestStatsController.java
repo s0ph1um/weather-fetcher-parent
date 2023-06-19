@@ -5,11 +5,13 @@ import com.wfproject.stats.service.RequestStatsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,6 +29,15 @@ public class RequestStatsController {
         log.info("Fetching requests page: {}, size: {}, sortBy: {}", page, size, sortBy);
         Page<RequestData> allRequests = requestStatsService.getRequests(page, size, sortBy, order);
         return ResponseEntity.ok(allRequests);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteCity(@PathVariable("id") Long id) {
+        log.info("Deleting request by ID: {}", id);
+        boolean deleteResult = requestStatsService.delete(id);
+        return deleteResult
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.notFound().build();
     }
 
 }
