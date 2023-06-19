@@ -22,7 +22,7 @@ export const RequestTablePagination = ({
 
     return (
         <TablePagination className={useStyles().pagination}
-                         rowsPerPageOptions={[5, 15, 30, totalElements]}
+                         rowsPerPageOptions={[5, 10, 20, {label: "All", value: totalElements}]}
                          component="div"
                          count={totalElements}
                          rowsPerPage={rowsPerPage}
