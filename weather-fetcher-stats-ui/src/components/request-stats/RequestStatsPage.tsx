@@ -7,7 +7,7 @@ import {useFetchRequestStats} from "../../hooks/useFetchRequestStats";
 export const RequestStatsPage = () => {
 
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(15);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
     const [sortField, setSortField] = useState('date');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 

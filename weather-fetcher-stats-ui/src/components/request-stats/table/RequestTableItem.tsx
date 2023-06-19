@@ -14,7 +14,7 @@ export const RequestTableItem = ({request, index, handleDelete}: {
     return (
         <TableRow key={request.id} className={index % 2 === 0 ? classes.oddRow : ''}>
             <TableCell style={{width: '5%'}}>{request.id}</TableCell>
-            <TableCell style={{width: '20%'}}>
+            <TableCell style={{width: '15%'}}>
                 {request.city ? request.city : 'not specified'}
             </TableCell>
             <TableCell style={{width: '10%'}}>
@@ -28,8 +28,8 @@ export const RequestTableItem = ({request, index, handleDelete}: {
                     {request.successful ? 'Yes' : 'No'}
                 </span>
             </TableCell>
-            <TableCell>
-                <Button variant="outlined" color="warning" onClick={() => handleDelete(request.id)}>
+            <TableCell style={{width: '5%'}}>
+                <Button size={'small'} variant="text" color="warning" onClick={() => handleDelete(request.id)}>
                     x
                 </Button>
             </TableCell>
