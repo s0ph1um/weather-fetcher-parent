@@ -20,9 +20,11 @@ export const RequestTablePagination = ({
         setPage(0);
     };
 
+    const rowsPerPageOptions = (): number[] => [5, 10, 20].filter(option => option < totalElements)
+
     return (
         <TablePagination className={useStyles().pagination}
-                         rowsPerPageOptions={[5, 10, 20, {label: "All", value: totalElements}]}
+                         rowsPerPageOptions={[...rowsPerPageOptions(), {label: "All", value: totalElements}]}
                          component="div"
                          count={totalElements}
                          rowsPerPage={rowsPerPage}
